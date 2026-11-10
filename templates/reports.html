@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block breadcrumb %}Reports{% endblock %}
+
+{% block content %}
+<div class="title-bar"><div><span class="eyebrow">YOUR DATA, READY TO GO</span><h1>From attendance to action.</h1><p class="page-subtitle">Export the records you need for your next decision.</p></div></div>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-file-export"></i> Attendance Export</h2>
+    </div>
+    <p class="hint">Export attendance records as a CSV file for spreadsheets or external record-keeping. Leave the dates blank to export the full history.</p>
+
+    <div class="log-filters" style="margin-top:16px; border-top:none; padding-top:0;">
+      <label for="exportStart">From</label>
+      <input type="date" id="exportStart">
+      <label for="exportEnd">To</label>
+      <input type="date" id="exportEnd">
+    </div>
+
+    <a href="{{ url_for('export_attendance') }}" id="exportBtn" class="btn-export">
+      <i class="fa-solid fa-download"></i> Export CSV Report
+    </a>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-user-graduate"></i> Exam Eligibility Report</h2>
+    </div>
+    <p class="hint">A per-threshold pass/fail attendance list is available on the <a href="{{ url_for('eligibility_page') }}">Eligibility</a> page, with its own export.</p>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='reports.js') }}"></script>
+{% endblock %}

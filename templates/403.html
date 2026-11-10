@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access Denied · Attendance System</title>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    } catch (err) { /* localStorage unavailable — falls back to system preference via CSS */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='studio3') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='studio.css', v='studio3') }}">
+</head>
+<body>
+
+  <div class="auth-page">
+    <div class="auth-card auth-card--center">
+      <i class="fa-solid fa-lock" style="font-size:34px; color:var(--red); margin-bottom:14px;"></i>
+      <h1>Access Denied</h1>
+      <p class="auth-card__hint">Your account doesn't have permission to view this page.</p>
+      <a href="{{ url_for('mark_attendance_page') }}" class="btn-primary btn-primary--full" style="margin-top:16px;">
+        <i class="fa-solid fa-arrow-left"></i> Back to Mark Attendance
+      </a>
+    </div>
+  </div>
+
+<script src="{{ url_for('static', filename='studio.js', v='studio3') }}"></script></body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Exam Eligibility{% endblock %}
+{% block breadcrumb %}Eligibility{% endblock %}
+
+{% block content %}
+<div class="title-bar"><div><span class="eyebrow">ACADEMIC PROGRESS</span><h1>Keep everyone on track.</h1><p class="page-subtitle">Review attendance requirements and student eligibility.</p></div></div>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-user-graduate"></i> Attendance Threshold Check</h2>
+      <span class="card__hint" id="eligibilitySessionCount">-- sessions recorded</span>
+    </div>
+
+    <div class="eligibility-controls">
+      <label for="eligibilityThreshold">Minimum attendance required</label>
+      <div class="eligibility-controls__input">
+        <input type="number" id="eligibilityThreshold" value="80" min="0" max="100" step="1">
+        <span>%</span>
+      </div>
+      <a href="{{ url_for('export_eligibility') }}?threshold=80" id="eligibilityExportBtn" class="btn-export btn-export--small">
+        <i class="fa-solid fa-download"></i> Export List
+      </a>
+    </div>
+
+    <div class="table-wrap table-wrap--tall">
+      <table class="log-table">
+        <thead>
+          <tr><th>Name</th><th>Present</th><th>Attendance %</th><th>Status</th></tr>
+        </thead>
+        <tbody id="eligibilityBody">
+          <tr><td colspan="4" class="log-empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='eligibility.js') }}"></script>
+{% endblock %}

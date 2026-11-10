@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In · Attendance System</title>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    } catch (err) { /* localStorage unavailable — falls back to system preference via CSS */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='studio3') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='studio.css', v='studio3') }}">
+</head>
+<body>
+
+
+  <div class="auth-page"><section class="login-story"><a class="studio-brand" href="#"><span class="brand-symbol">a<span>•</span></span><div>attend<span>CAMPUS WORKSPACE</span></div></a><span class="hero-kicker">LESS ADMIN. MORE CONNECTION.</span><h1>Be present.<br>Make it <em>count.</em></h1><p>A thoughtful space for your campus attendance.<br>One face. One moment. All connected.</p><div class="login-orbit" aria-hidden="true">◎</div><span class="login-footnote">PEOPLE FIRST. EVERY DAY.</span></section>
+    <div class="auth-card">
+      <div class="auth-card__brand auth-card__brand--centered">
+        <img src="{{ url_for('static', filename='uwl-logo.png') }}" alt="University of West London" class="brand-logo brand-logo--large">
+      </div>
+
+      <span class="eyebrow">WELCOME BACK</span><h1>Your campus awaits.</h1>
+      <p class="auth-card__hint">Use your Gate Security or Management account.</p>
+
+      {% if error %}
+        <p class="status-msg status-msg--error">{{ error }}</p>
+      {% endif %}
+
+      <form method="POST" class="auth-form">
+        <label>
+          Username
+          <input type="text" name="username" autocomplete="username" required autofocus>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit" class="btn-primary btn-primary--full">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+        <button class="theme-switch" style="margin-top:16px;" aria-label="Toggle dark mode">
+          <span>Dark Mode</span>
+          <span class="theme-switch__track"><span class="theme-switch__thumb"><i class="fa-solid fa-sun"></i></span></span>
+        </button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='theme.js', v='studio3') }}"></script>
+
+<script src="{{ url_for('static', filename='studio.js', v='studio3') }}"></script></body>
+</html>

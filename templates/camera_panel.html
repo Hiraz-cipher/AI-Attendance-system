@@ -1,0 +1,9 @@
+<div class="camera-layout">
+  <section class="card camera-card">
+    <div class="card__head"><div><span class="eyebrow">PHONE CAMERA · ATTENDANCE STATION</span><h2>Live verification</h2></div><span data-camera-status class="connection-pill" role="status">Connecting…</span></div>
+    <div class="viewfinder viewfinder--large"><img class="viewfinder__img" src="{{ url_for('video_feed') }}" alt="Live camera for attendance verification"><span class="camera-caption">Keep one person in the frame</span></div>
+    <div class="camera-toolbar"><a href="{{ url_for('camera_settings_page') }}">Configure phone camera ↗</a><span>Attendance saves automatically after verification.</span><button type="button" class="btn-primary" data-camera-retry>Reconnect feed</button></div>
+    <p data-camera-message class="hint" role="status" aria-live="polite">Connecting to the camera on the computer running this app…</p>
+  </section>
+  <aside class="card guidance"><span class="eyebrow">A QUICK CHECK-IN</span><h2>Ready in three steps</h2><ol class="checkin-steps"><li><b>Face the camera</b><span>Stand in good light with your full face visible.</span></li><li><b>Blink or move naturally</b><span>A small head turn helps verify that you are present.</span></li><li><b>Wait for green</b><span>Your name and “Live” confirm verification. Repeat check-ins are saved once per day.</span></li></ol><div class="legend"><p><i class="legend-dot green"></i> Green · verified</p><p><i class="legend-dot amber"></i> Amber · verification needed</p><p><i class="legend-dot red"></i> Red · face not recognized</p></div><details><summary>Camera troubleshooting</summary><p>Close Camera, Teams or Zoom. Allow desktop apps to access the camera in Windows Settings. Open Phone camera settings and select the Windows device number for your connected phone. Enable “Use as connected camera” in Windows Mobile devices settings.</p></details></aside>
+</div>

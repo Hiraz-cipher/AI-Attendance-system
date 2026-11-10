@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Add Student{% endblock %}
+{% block breadcrumb %}Add Student{% endblock %}
+
+{% block content %}
+<div class="title-bar"><div><span class="eyebrow">GROW YOUR CAMPUS</span><h1>A warm welcome starts here.</h1><p class="page-subtitle">Build a student profile with a few clear photos.</p></div></div>
+
+  <div class="two-col">
+
+    <!-- Camera + capture -->
+    <section class="card">
+      <div class="card__head">
+        <h2><i class="fa-solid fa-camera"></i> Capture Photos</h2><span data-camera-status class="connection-pill" role="status">Connecting…</span>
+        <span id="captureCount" class="status-badge"><span class="status-dot"></span> 0 / 5 captured</span>
+      </div>
+
+      <div class="viewfinder">
+        <img class="viewfinder__img" src="{{ url_for('register_feed') }}" alt="Registration camera preview">
+      </div>
+
+      <p class="hint">Face the camera directly, good lighting, one person in frame. Move slightly between captures (turn head, tilt up/down) for a more robust dataset.</p>
+
+      <div class="form-row">
+        <input type="text" id="studentName" placeholder="Student full name" autocomplete="off">
+      </div>
+
+      <div class="btn-row">
+        <button id="captureBtn" class="btn-primary" disabled>
+          <i class="fa-solid fa-camera"></i> Capture Photo
+        </button>
+        <button id="finishBtn" class="btn-export" disabled>
+          <i class="fa-solid fa-check"></i> Finish &amp; Save Student
+        </button>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+    </section>
+
+    <!-- Instructions -->
+    <section class="card">
+      <div class="card__head">
+        <h2><i class="fa-solid fa-circle-info"></i> How It Works</h2>
+      </div>
+      <ol class="steps-list">
+        <li>Type the student's full name.</li>
+        <li>Position their face in the preview — the box turns green when it's ready.</li>
+        <li>Click <strong>Capture Photo</strong> at least 5 times, changing angle slightly each time.</li>
+        <li>Click <strong>Finish &amp; Save Student</strong> — this rebuilds the recognition model so they're recognized immediately, no restart needed.</li>
+        <li>Go back to <a href="{{ url_for('index') }}">Overview</a> and they'll show up in the sidebar's registered-students list.</li>
+      </ol>
+    </section>
+
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='register.js') }}"></script>
+{% endblock %}

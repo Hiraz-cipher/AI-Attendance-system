@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock %}
+{% block breadcrumb %}Overview{% endblock %}
+
+{% block content %}
+<section class="welcome-hero"><div><span class="hero-kicker">THE EVERYDAY, MADE EASIER</span><h1>Every face.<br>Every day. <em>Accounted for.</em></h1><p>A connected campus starts with a simple check-in.<br>Your attendance, people and insights in one place.</p><a class="hero-action" href="{{ url_for('mark_attendance_page') }}">Open attendance station <span>↗</span></a></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face-card"><div class="face-avatar">☺</div><span>IDENTITY VERIFIED</span><b>You're checked in.</b><i>✓</i></div><div class="floating-tag">◎ Connected campus</div></div></section>
+<div class="section-heading"><div><span class="eyebrow">THE BIG PICTURE</span><h2>Your attendance pulse</h2></div><a href="{{ url_for('analytics_page') }}">Explore analytics ↗</a></div>
+  <div class="tab-row">
+    <button class="pill pill--active" data-range="today">Today</button>
+    <button class="pill" data-range="week">This Week</button>
+    <button class="pill" data-range="month">This Month</button>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-card--blue">
+      <span class="kpi-label">Total Registered</span>
+      <span id="kpiTotal" class="kpi-value">--</span>
+    </div>
+    <div class="kpi-card kpi-card--green">
+      <span id="kpiPresentLabel" class="kpi-label">Present Today</span>
+      <span id="kpiPresent" class="kpi-value">--</span>
+    </div>
+    <div class="kpi-card kpi-card--red">
+      <span id="kpiAbsentLabel" class="kpi-label">Absent Today</span>
+      <span id="kpiAbsent" class="kpi-value">--</span>
+    </div>
+    <div class="kpi-card kpi-card--navy">
+      <span class="kpi-label">Attendance %</span>
+      <span id="kpiPercent" class="kpi-value">--</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <section class="card">
+      <div class="card__head">
+        <h2><i class="fa-solid fa-video"></i> Attendance station</h2>
+        <span class="connection-pill">Link to Windows</span>
+      </div>
+<div class="station-launch"><span class="eyebrow">PHONE CAMERA CHECK-IN</span><h3>A little moment.<br>A seamless arrival.</h3><p>Use your connected phone to verify each student.</p><a class="hero-action" href="{{ url_for('mark_attendance_page') }}">Start check-in ↗</a><a href="{{ url_for('camera_settings_page') }}">Set up phone camera →</a></div>      <p class="hint">Full-size view and controls are on the <a href="{{ url_for('mark_attendance_page') }}">Mark Attendance</a> page.</p>
+    </section>
+
+    <section class="card">
+      <div class="card__head">
+        <h2><i class="fa-solid fa-list-check"></i> Latest Check-ins</h2>
+        <span class="card__hint">Today, most recent first</span>
+      </div>
+      <div class="table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr><th>Name</th><th>Time</th><th>Status</th></tr>
+          </thead>
+          <tbody id="logBody">
+            <tr><td colspan="3" class="log-empty">No check-ins yet today.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">Full history and date filtering: <a href="{{ url_for('log_page') }}">Attendance Log</a>.</p>
+    </section>
+  </div>
+{% endblock %}
+
+{% block fab %}
+  <a href="{{ url_for('log_page') }}" class="fab" title="Go to Attendance Log">
+    <i class="fa-solid fa-bell"></i>
+    <span id="fabBadge" class="fab__badge">0</span>
+  </a>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='overview.js') }}"></script>
+{% endblock %}

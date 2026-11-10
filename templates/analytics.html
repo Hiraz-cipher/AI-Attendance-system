@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+{% block breadcrumb %}Analytics{% endblock %}
+
+{% block content %}
+<div class="title-bar"><div><span class="eyebrow">INSIGHTS & PATTERNS</span><h1>See the bigger picture.</h1><p class="page-subtitle">Explore attendance trends across your campus.</p></div></div>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-chart-column"></i> Attendance Trends</h2>
+      <span class="card__hint">Last 14 days</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="trendChart" height="90"></canvas>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-ranking-star"></i> By Person</h2>
+      <span class="card__hint">Total days recorded</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="personChart" height="120"></canvas>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2><i class="fa-solid fa-calendar-week"></i> Weekday Pattern</h2>
+      <span class="card__hint">Average present, by day of week</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="weekdayChart" height="90"></canvas>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='analytics.js') }}"></script>
+{% endblock %}

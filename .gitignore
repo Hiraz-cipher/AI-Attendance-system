@@ -1,0 +1,27 @@
+# Local identity data, credentials and runtime output
+.env
+.env.*
+!.env.example
+*credentials*.json*
+*service*account*.json*
+*.pem
+*.key
+*.db
+*.db-*
+*.sqlite*
+*.csv
+*.pkl
+*.task
+dataset/
+eval_data/
+results/
+evaluation/eval_data/
+evaluation/results/
+Models/eval_data/
+Models/results/
+camera_settings.json
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/

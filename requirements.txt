@@ -1,0 +1,9 @@
+Flask>=3.0,<4
+Werkzeug>=3.0,<4
+opencv-python>=4.8,<5
+deepface
+pandas
+numpy
+tf-keras
+mediapipe>=0.10
+# Optional cloud sync: pip install firebase-admin

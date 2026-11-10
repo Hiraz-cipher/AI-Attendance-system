@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Attendance · Gate Security</title>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    } catch (err) { /* localStorage unavailable — falls back to system preference via CSS */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='studio3') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='studio.css', v='studio3') }}">
+</head>
+<body>
+
+
+  <div class="standalone-page">
+
+    <div class="topbar-mini">
+      <div class="sidebar__brand" style="border-bottom:none; padding:0;">
+        <img src="{{ url_for('static', filename='uwl-logo.png') }}" alt="University of West London" class="brand-logo brand-logo--small">
+        <div>
+          <strong>attend · Gate Security</strong>
+          <span>Signed in as {{ session.username }}</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <a href="{{ url_for('logout') }}" class="topbar-mini__logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </a>
+        <button class="theme-switch theme-switch--compact" title="Toggle dark mode" aria-label="Toggle dark mode">
+          <span class="theme-switch__track"><span class="theme-switch__thumb"><i class="fa-solid fa-sun"></i></span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="standalone-content">
+<div class="title-bar"><div><span class="eyebrow">GATE SECURITY</span><h1>Welcome. Let’s check in.</h1></div></div>{% include "camera_panel.html" %}
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='theme.js', v='studio3') }}"></script>
+<script src="{{ url_for('static', filename='camera.js', v='studio3') }}"></script><script src="{{ url_for('static', filename='studio.js', v='studio3') }}"></script></body>
+</html>

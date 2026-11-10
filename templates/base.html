@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Attendance Dashboard{% endblock %} · University of West London</title>
+<script>
+  // Runs before first paint to avoid a flash of the wrong theme.
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    } catch (err) { /* localStorage unavailable — falls back to system preference via CSS */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='studio3') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='studio.css', v='studio3') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="workspace-sidebar">
+      <a class="studio-brand" href="{{ url_for('index') }}"><span class="brand-symbol">a<span>•</span></span><div>attend<span>CAMPUS WORKSPACE</span></div></a>
+      <div class="sidebar__search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="studentSearch" placeholder="Search student...">
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__label">Menu</span>
+        {% if session.role == "management" %}
+        <a href="{{ url_for('index') }}" class="nav-item {{ 'nav-item--active' if active_page == 'overview' else '' }}"><i class="fa-solid fa-gauge"></i> Overview</a>
+        {% endif %}
+        <a href="{{ url_for('mark_attendance_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'mark' else '' }}"><i class="fa-solid fa-video"></i> Mark Attendance</a>
+        {% if session.role == "management" %}
+        <a href="{{ url_for('register_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'register' else '' }}"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+        <a href="{{ url_for('log_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'log' else '' }}"><i class="fa-solid fa-list-check"></i> Attendance Log</a>
+        <a href="{{ url_for('analytics_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'analytics' else '' }}"><i class="fa-solid fa-chart-column"></i> Analytics</a>
+        <a href="{{ url_for('eligibility_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'eligibility' else '' }}"><i class="fa-solid fa-user-graduate"></i> Eligibility</a>
+        <a href="{{ url_for('reports_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'reports' else '' }}"><i class="fa-solid fa-file-export"></i> Reports</a>
+
+        {% endif %}
+        <a href="{{ url_for('camera_settings_page') }}" class="nav-item {{ 'nav-item--active' if active_page == 'camera' else '' }}"><i class="fa-solid fa-mobile-screen"></i> Phone camera</a>
+        <span class="sidebar__label">Account</span>
+        <span class="nav-item" style="cursor:default;"><i class="fa-solid fa-circle-user"></i> {{ session.username }}</span>
+        <a href="{{ url_for('logout') }}" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+        <button class="theme-switch" aria-label="Toggle dark mode">
+          <span>Dark Mode</span>
+          <span class="theme-switch__track"><span class="theme-switch__thumb"><i class="fa-solid fa-sun"></i></span></span>
+        </button>
+
+        <span class="sidebar__label">Registered Students</span>
+        <ul id="studentList" class="sidebar__students">
+          <li class="sidebar__student-empty">Loading...</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+<button class="mobile-nav-toggle" aria-expanded="false" aria-controls="workspace-sidebar">☰ Menu</button>
+
+      <div class="breadcrumb">
+        <i class="fa-solid fa-house"></i>
+        <a href="{{ url_for('index') }}">Home</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="breadcrumb__current">{% block breadcrumb %}Overview{% endblock %}</span>
+        <span class="breadcrumb__spacer"></span>
+        <span class="workspace-chip">Campus workspace</span><span id="clock" class="clock">--:--:--</span>
+      </div>
+
+      {% block content %}{% endblock %}
+
+    </main>
+  </div>
+
+  {% block fab %}{% endblock %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='theme.js', v='studio3') }}"></script>
+  <script src="{{ url_for('static', filename='shared.js', v='studio3') }}"></script>
+  <script src="{{ url_for('static', filename='camera.js', v='studio3') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+<script src="{{ url_for('static', filename='studio.js', v='studio3') }}"></script></body>
+</html>

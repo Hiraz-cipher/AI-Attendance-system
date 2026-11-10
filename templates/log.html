@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Attendance Log{% endblock %}
+{% block breadcrumb %}Attendance Log{% endblock %}
+
+{% block content %}
+<div class="title-bar"><div><span class="eyebrow">ATTENDANCE HISTORY</span><h1>A record of every arrival.</h1><p class="page-subtitle">Find a student, choose a date, and see who checked in.</p></div></div>
+
+  <section class="card">
+    <div class="log-filters">
+      <label for="logDate">Date</label>
+      <input type="date" id="logDate">
+      <button id="logTodayBtn" class="btn-secondary">Today</button>
+
+      <label for="logNameFilter" class="log-filters__search-label">Search</label>
+      <input type="text" id="logNameFilter" placeholder="Filter by name..." class="log-filters__search">
+    </div>
+
+    <div class="table-wrap table-wrap--tall">
+      <table class="log-table">
+        <thead>
+          <tr><th>Name</th><th>Time</th><th>Status</th></tr>
+        </thead>
+        <tbody id="logBody">
+          <tr><td colspan="3" class="log-empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{{ url_for('static', filename='log.js') }}"></script>
+{% endblock %}
